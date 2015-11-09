@@ -9,15 +9,22 @@
 <!-- boot strap -->
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-<script src="bootstrap/js/bootstrap.min.js">
+<script src="bootstrap/js/bootstrap.min.js"></script>
 
 <!-- develop js -->
 <script src="reflect/reflect.js"></script>
 </head>
 <body>
 
-<div class="test"></div>
+<div class="test">
+    <div></div>
 
+</div>
 
+<script>
+	var text = '{"test1": "one", "test2": "two"}';
+	var json = $.parseJSON(text)
+    $(".test").reflect(json);
+</script>
 </body>
 </html>
