@@ -18,12 +18,16 @@
 
 <div class="parent">
     <div class="test1"></div>
-    <div class="test2"></div>
+    <div class="test2">
+    	<div class="test2-2">
+    		<div class="test3-1"></div>
+    	</div>
+    </div>
 </div>
 <div class="test1"></div>
 
 <script>
-	var text = '{"test1": "one", "test2": "two"}';
+	var text = '{"test1": "one", "test2": {"test2-1": "two", "test2-2": {"test3-1": "three"}}}';
 	var json = $.parseJSON(text)
     $(".parent").reflect(json);
 </script>
