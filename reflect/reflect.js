@@ -1,25 +1,33 @@
 (function (jQuery) {
 	var $ = jQuery;
 	var reflectHander = {
-		start: function(target, json) {
-			reflectHtml(target, json);
+		start: function(target, response) {
+			reflectHtml(target, response);
 		}
 	}
 
-	function reflectHtml(target, json) {
-		for (key in json) {
+	function reflectHtml(target, response) {
+		for (key in response) {
 			var childTarget = target.children("." + key);
-			var value = json[key];
-			if (typeof json[key] == "string") {
-				childTarget.html(value);
+			var value = response[key];
+			var valueType = typeof value;
+			if (valueType === "string" || 
+				valueType === "number" || 
+				valueType === "boolean") {
+
+				if (childTarget.prop("tagName") == "INPUT") {
+					childTarget.val(value);
+				} else {
+					childTarget.html(value);
+				}
 			} else {
 				reflectHtml(childTarget, value);
 			}
 		}
 	}
 
-	$.fn.reflect = function(json) {
+	$.fn.reflectResponse = function(response) {
 		var target = $(this);
-		reflectHander.start(target, json);
+		reflectHander.start(target, response);
 	}
 })(jQuery);
