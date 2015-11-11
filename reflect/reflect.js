@@ -11,8 +11,8 @@
 			var childTarget = target.children("." + key);
 			var value = response[key];
 			var valueType = typeof value;
-			if (valueType === "string" || 
-				valueType === "number" || 
+
+			if (valueType === "string" || valueType === "number" || 
 				valueType === "boolean") {
 
 				if (childTarget.prop("tagName") == "INPUT") {
@@ -20,10 +20,22 @@
 				} else {
 					childTarget.html(value);
 				}
+			} else if (value instanceof Array) {
+				for (var val in value) {
+					var cloneTarget = clone(childTarget, key);
+					reflectHtml(cloneTarget, val);
+				}
 			} else {
 				reflectHtml(childTarget, value);
 			}
 		}
+	}
+
+	function clone(obj, targetClass) {
+		var dummy = $("<div>");
+		obj.clone().appendTo(dummy);
+		var cloneObj = dummy.children("." + targetClass);
+		return cloneObj;
 	}
 
 	$.fn.reflectResponse = function(response) {

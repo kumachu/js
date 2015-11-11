@@ -22,13 +22,15 @@
     	<div class="test2-2">
     		<div class="test3-1"></div>
     		<input type="input" class="test3-2" />
+
     	</div>
+    	<div class="test4-1"></div>
     </div>
 </div>
 <div class="test1"></div>
 
 <script>
-	var text = '{"test1": "one", "test2": {"test2-1": "two", "test2-2": {"test3-1": "three", "test3-2": 3}}}';
+	var text = '{"test1": "one", "test2": {"test2-1": "two", "test2-2": {"test3-1": "three", "test3-2": 3}, "test4-1":[1,2,3,4]}}';
 	var json = $.parseJSON(text)
     $(".parent").reflectResponse(json);
 </script>
