@@ -2,40 +2,46 @@
 	var $ = jQuery;
 	var reflectHander = {
 		start: function(target, response) {
-			reflectHtml(target, response);
-		}
-	}
-
-	function reflectHtml(target, response) {
-		for (key in response) {
-			var childTarget = target.children("." + key);
-			var value = response[key];
-			var valueType = typeof value;
-
-			if (valueType === "string" || valueType === "number" || 
-				valueType === "boolean") {
-
-				if (childTarget.prop("tagName") == "INPUT") {
-					childTarget.val(value);
-				} else {
-					childTarget.html(value);
-				}
-			} else if (value instanceof Array) {
-				for (var val in value) {
-					var cloneTarget = clone(childTarget, key);
-					reflectHtml(cloneTarget, val);
+			this.reflectHtml(target, response);
+		},
+		reflectHtml: function(parentTarget, response) {
+			if (this.isPrimitive(response)) {
+				this.reflectValue(parentTarget, response);
+			} else if(this.isArray(response)) {
+				for (var i = response.length - 1; i >= 0; i--) {
+					if (i === response.length -1) {
+						var cloneTarget = parentTarget;
+					} else {
+						var cloneTarget = parentTarget.clone();
+						parentTarget.after(cloneTarget);
+					}
+					this.reflectHtml(parentTarget, response[i]);
 				}
 			} else {
-				reflectHtml(childTarget, value);
+				this.reflectObject(parentTarget, response);
 			}
+		},
+		reflectObject: function(parentTarget, response) {
+			for (key in response) {
+				var target = parentTarget.children("." + key);
+				var value = response[key];
+				this.reflectHtml(target, value);
+			}
+		},
+		reflectValue: function (target, value) {
+			if (target.prop("tagName") === "INPUT") {
+				target.val(value);
+			} else {
+				target.html(value);
+			}
+		},
+		isPrimitive: function(value) {
+			var valueType = typeof value;
+			return valueType === "string" || valueType === "number" || valueType === "boolean";
+		},
+		isArray: function(value) {
+			return value instanceof Array;
 		}
-	}
-
-	function clone(obj, targetClass) {
-		var dummy = $("<div>");
-		obj.clone().appendTo(dummy);
-		var cloneObj = dummy.children("." + targetClass);
-		return cloneObj;
 	}
 
 	$.fn.reflectResponse = function(response) {

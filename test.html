@@ -17,20 +17,18 @@
 <body>
 
 <div class="parent">
-    <div class="test1"></div>
-    <div class="test2">
-    	<div class="test2-2">
-    		<div class="test3-1"></div>
-    		<input type="input" class="test3-2" />
-
-    	</div>
-    	<div class="test4-1"></div>
+    <div class="name"></div>
+    <div class="email"></div>
+    <div class="hobby"></div>
+    <div class="friend">
+        <div class="name"></div>
+        <div class="email"></div>
     </div>
 </div>
 <div class="test1"></div>
 
 <script>
-	var text = '{"test1": "one", "test2": {"test2-1": "two", "test2-2": {"test3-1": "three", "test3-2": 3}, "test4-1":[1,2,3,4]}}';
+	var text = '{"name": "もげ", "email": "moge@mail.com", "hobby": ["読書", "開発", "筋トレ"], "friend": [{"name": "たろう", "email": "taro@mail.com"}, {"name": "二郎", "email": "not found"}, {"name": "三郎", "email": "three@mail.com"}]}';
 	var json = $.parseJSON(text)
     $(".parent").reflectResponse(json);
 </script>
