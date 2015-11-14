@@ -4,6 +4,15 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!-- jasmine -->
+<link rel="stylesheet" href="jasmine/lib/jasmine-core/jasmine.css"> 
+<script src="jasmine/lib/jasmine-core/jasmine.js"></script>
+<script src="jasmine/lib/jasmine-core/jasmine-html.js"></script>
+<script src="jasmine/lib/jasmine-core/boot.js"></script>
+<!-- testsource -->
+<script src="test/test.js"></script>
+
+<!-- jQuery -->
 <script src="js/jquery-1.11.3.min.js"></script>
 
 <!-- boot strap -->
@@ -15,34 +24,41 @@
 <script src="reflect/reflect.js"></script>
 </head>
 <body>
-
     <div class="container">
         <div class="page-header">
-            <h1>reflect plugin use Example</h1>
+            <h1>reflect plugin test</h1>
         </div>
 
-        <div class="jumbotron">
-            <textarea>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="simple">{"test": "value"}</div>
+                <div class="simple">
+                    <div class="test"></div>
+                </div>
+            </div>
+        </div>
 
-            </textarea>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="primitiveArray">{"test": ["value0", "value1", "value2"]}</div>
+                <div class="primitiveArray">
+                    <div class="test"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="objectArray">{"testObject": [{"test1": "value1", "test2": "value2", "test3": "value3"}, {"test1": "value4", "test2": "value5", "test3": "value6"}, {"test1": "value7", "test2": "value8", "test3": "value9"}]}</div>
+                <div class="objectArray">
+                    <div class="testObject">
+                        <div class="test1"></div>
+                        <div class="test2"></div>
+                        <div class="test3"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-<div class="parent">
-    <div class="name"></div>
-    <div class="email"></div>
-    <div class="hobby"></div>
-    <div class="friend">
-        <div class="name"></div>
-        <div class="email"></div>
-    </div>
-</div>
-<div class="test1"></div>
-
-<script>
-	var text = '{"name": "もげ", "email": "moge@mail.com", "hobby": ["読書", "開発", "筋トレ"], "friend": [{"name": "たろう", "email": "taro@mail.com"}, {"name": "二郎", "email": "not found"}, {"name": "三郎", "email": "three@mail.com"}]}';
-	var json = $.parseJSON(text)
-    $(".parent").reflectResponse(json);
-</script>
 </body>
 </html>
