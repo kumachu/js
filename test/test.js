@@ -1,7 +1,6 @@
 describe('success case', function() {
     it('simple', function(){
 		var response = $("#simple").html();
-		console.log(response);
 		var json = $.parseJSON(response);
     	$(".simple").reflectResponse(json);
         expect($(".simple .test").html()).toBe("value");
@@ -9,7 +8,6 @@ describe('success case', function() {
 
     it('primitive array', function(){
 		var response = $("#primitiveArray").html();
-		console.log(response);
 		var json = $.parseJSON(response);
     	$(".primitiveArray").reflectResponse(json);
         expect($(".primitiveArray .test:eq(0)").html()).toBe("value0");
@@ -19,7 +17,6 @@ describe('success case', function() {
 
     it('object array', function(){
 		var response = $("#objectArray").html();
-		console.log(response);
 		var json = $.parseJSON(response);
     	$(".objectArray").reflectResponse(json);
         expect($(".objectArray .testObject:eq(0) .test1").html()).toBe("value1");

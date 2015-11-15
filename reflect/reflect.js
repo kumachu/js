@@ -13,12 +13,16 @@
 				this.reflectObject(parentTarget, response);
 			}
 		},
-		reflectValue: function (target, value) {
-			if (target.prop("tagName") === "INPUT") {
-				target.val(value);
-			} else {
-				target.html(value);
-			}
+		reflectValue: function (targets, value) {
+			targets.each(function(index, val) {
+				var target = $(val);
+				if (target.prop("tagName") === "INPUT") {
+					target.val(value);
+				} else {
+					target.html(value);
+				}
+			});
+
 		},
 		reflectArray: function(target, values) {
 			for (var i = values.length - 1; i >= 0; i--) {
