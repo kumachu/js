@@ -1,17 +1,17 @@
 describe('success case', function() {
     it('simple', function(){
-		var response = $("#simple").html();
-		var json = $.parseJSON(response);
-    	$(".simple").reflectResponse(json);
+        var response = $("#simple").html();
+        var json = $.parseJSON(response);
+        $(".simple").reflectResponse(json);
         expect($(".simple div.test").html()).toBe("value");
 
         expect($(".simple input.test").val()).toBe("value");
     });
 
     it('primitive array', function(){
-		var response = $("#primitiveArray").html();
-		var json = $.parseJSON(response);
-    	$(".primitiveArray").reflectResponse(json);
+        var response = $("#primitiveArray").html();
+        var json = $.parseJSON(response);
+        $(".primitiveArray").reflectResponse(json);
         expect($(".primitiveArray div.test:eq(0)").html()).toBe("value0");
         expect($(".primitiveArray div.test:eq(1)").html()).toBe("value1");
         expect($(".primitiveArray div.test:eq(2)").html()).toBe("value2");
@@ -22,8 +22,8 @@ describe('success case', function() {
     });
 
     it('object array', function(){
-		var response = $("#objectArray").html();
-		var json = $.parseJSON(response);
+        var response = $("#objectArray").html();
+        var json = $.parseJSON(response);
     	$(".objectArray").reflectResponse(json);
         expect($(".objectArray .testObject:eq(0) div.test1").html()).toBe("value1");
         expect($(".objectArray .testObject:eq(0) div.test2").html()).toBe("value2");
