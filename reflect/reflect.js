@@ -2,15 +2,15 @@
 	var $ = jQuery;
 	var reflectHander = {
 		start: function(target, response) {
-			this.reflectHtml(target, response);
+			reflectHander.reflectHtml(target, response);
 		},
 		reflectHtml: function(parentTarget, response) {
-			if (this.isPrimitive(response)) {
-				this.reflectValue(parentTarget, response);
-			} else if(this.isArray(response)) {
-				this.reflectArray(parentTarget, response);
+			if (reflectHander.isPrimitive(response)) {
+				reflectHander.reflectValue(parentTarget, response);
+			} else if(reflectHander.isArray(response)) {
+				reflectHander.reflectArray(parentTarget, response);
 			} else {
-				this.reflectObject(parentTarget, response);
+				reflectHander.reflectObject(parentTarget, response);
 			}
 		},
 		reflectValue: function (targets, value) {
@@ -24,22 +24,26 @@
 			});
 
 		},
-		reflectArray: function(target, values) {
-			for (var i = values.length - 1; i >= 0; i--) {
-				if (i === values.length -1) {
-					var cloneTarget = target;
-				} else {
-					var cloneTarget = target.clone();
-					target.after(cloneTarget);
+		reflectArray: function(targets, values) {
+			targets.each(function () {
+				var target = $(this);
+				var counta = values.length - 1;
+				for (var i = counta; i >= 0; i--) {
+					if (i === counta) {
+						var cloneTarget = target;
+					} else {
+						var cloneTarget = target.clone();
+						target.after(cloneTarget);
+					}
+					reflectHander.reflectHtml(target, values[i]);
 				}
-				this.reflectHtml(target, values[i]);
-			}
+			});
 		},
 		reflectObject: function(parentTarget, response) {
 			for (key in response) {
 				var target = parentTarget.children("." + key);
 				var value = response[key];
-				this.reflectHtml(target, value);
+				reflectHander.reflectHtml(target, value);
 			}
 		},
 		isPrimitive: function(value) {
