@@ -27,15 +27,24 @@
 		reflectArray: function(targets, values) {
 			targets.each(function () {
 				var target = $(this);
-				var counta = values.length - 1;
-				for (var i = counta; i >= 0; i--) {
-					if (i === counta) {
-						var cloneTarget = target;
-					} else {
-						var cloneTarget = target.clone();
-						target.after(cloneTarget);
+				if (target.prop("tagName") === "SELECT") {
+					for (var i = 0; i < values.length; i ++) {
+						var option = $("<option>");
+						option.val(values[i]);
+						option.html(values[i]);
+						target.append(option);
 					}
-					reflectHander.reflectHtml(target, values[i]);
+				} else {
+					var valueCount = values.length - 1;
+					for (var i = valueCount; i >= 0; i--) {
+						if (i === valueCount) {
+							var cloneTarget = target;
+						} else {
+							var cloneTarget = target.clone();
+							target.after(cloneTarget);
+						}
+						reflectHander.reflectHtml(target, values[i]);
+					}
 				}
 			});
 		},
