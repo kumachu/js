@@ -96,13 +96,11 @@
         var zIndex = 0;
         $(objects).each(function() {
             var thisIndex = $(this).css("z-index");
-            console.log($(this).attr("id") + thisIndex);
             if (thisIndex != "auto") {
                 zIndex = zIndex < thisIndex ? thisIndex : zIndex;
             }
         });
-        console.log(zIndex);
-        target.zIndex(zIndex + 1);
+        target.css("z-index", parseInt(zIndex) + 1);
     }
 
     $.fn.reflectResponse = function(response) {

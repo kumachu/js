@@ -4,11 +4,10 @@ describe('success case', function() {
         var json = $.parseJSON(response);
         $(".simple").reflectResponse(json);
         expect($(".simple div.test").html()).toBe("value");
-
         expect($(".simple input.test").val()).toBe("value");
     });
 
-    it('primitive array', function(){
+    it('primitive array', function() {
         var response = $("#primitiveArray").html();
         var json = $.parseJSON(response);
         $(".primitiveArray").reflectResponse(json);
@@ -21,10 +20,10 @@ describe('success case', function() {
         expect($(".primitiveArray input.test:eq(2)").val()).toBe("value2");
     });
 
-    it('object array', function(){
+    it('object array', function() {
         var response = $("#objectArray").html();
         var json = $.parseJSON(response);
-    	$(".objectArray").reflectResponse(json);
+        $(".objectArray").reflectResponse(json);
         expect($(".objectArray .testObject:eq(0) div.test1").html()).toBe("value1");
         expect($(".objectArray .testObject:eq(0) div.test2").html()).toBe("value2");
         expect($(".objectArray .testObject:eq(0) div.test3").html()).toBe("value3");
@@ -44,5 +43,10 @@ describe('success case', function() {
         expect($(".objectArray .testObject:eq(2) input.test1").val()).toBe("value7");
         expect($(".objectArray .testObject:eq(2) input.test2").val()).toBe("value8");
         expect($(".objectArray .testObject:eq(2) input.test3").val()).toBe("value9");
+    });
+
+    it('toTop', function() {
+        $("#test1").toTop();
+        expect($("#test1").css("z-index")).toBe('5');
     });
 });
